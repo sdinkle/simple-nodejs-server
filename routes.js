@@ -53,6 +53,33 @@ const requestHandler = (req, res) => {
         // Return the response
         return res.end();
     }
+    // Set up the "/create-user" route
+    // Log the submitted text to the console and return to the root page
+    else if (url === "/create-user" && method === "POST") {
+        // Declare the body array
+        const body = [];
+
+        // Define the data event
+        req.on('data', (chunk) => {
+            // Push the chunk into the body array
+            body.push(chunk);
+        });
+
+        // Define the end event and return it
+        return req.on('end', () => {
+            // Parse out the username
+            const parsedBody = Buffer.concat(body).toString();
+            const username = parsedBody.split('=')[1];
+
+            // Log the parsed username to the console
+            console.log(username);
+
+            // Redirect back to the root page
+            res.statusCode = 302;
+            res.setHeader('Location', '/');
+            return res.end();
+        });
+    }
 };
 
 // Establish module.exports properties
