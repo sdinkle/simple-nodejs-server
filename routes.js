@@ -8,7 +8,7 @@ const requestHandler = (req, res) => {
     // Serve a basic greeting page
     if (url === '/') {
         // Serve a basic greeting page
-        res.write(`<!doctype html
+        res.write(`<!doctype html>
             <html>
                 <head>
                     <title>Simple Node.js Server</title>
